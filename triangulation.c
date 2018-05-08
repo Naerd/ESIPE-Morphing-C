@@ -4,8 +4,6 @@
 #include "interface.h"
 #include <MLV/MLV_all.h>
 
-
-
 triangle* createTriangle(float x1,float y1, float x2, float y2, float x3, float y3){
 
 	triangle *tri = (triangle*)malloc(sizeof(triangle));
@@ -55,3 +53,15 @@ void printTriangle(triangle *tri){
 	MLV_draw_line(tri->x.coordX,tri->x.coordY,tri->z.coordX,tri->z.coordY,colorTri);
 	MLV_draw_line(tri->y.coordX,tri->y.coordY,tri->z.coordX,tri->z.coordY,colorTri);
 }
+
+/*
+void add_constraint_points(int x, int y, list l){
+	point p;
+	p.coordX=x;
+	p.coordY=y;
+	list tmp = l;
+	while(isInside(tmp->triLeft,p)!=1){
+		tmp = tmp->next;
+	}
+	tmp->triLeft
+}*/

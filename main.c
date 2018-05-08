@@ -14,8 +14,10 @@ void print_text_frames(int i, char* c); /* INTERFACE */
 int main(int argc, char *argv[]){
 
 	init_window();
-	triangle *tri = createTriangle(50.14,98.21,69.45,51,107.6,158.69); 
-	printTriangle(tri);
+	triangle *triBase1 = createTriangle(0.,0.,512.0,0.,512.,512.); 
+	triangle *triBase2 = createTriangle(0.,0.,512.0,0.,0.,512.);
+	printTriangle(triBase1);
+	printTriangle(triBase2);
 
 	/*int yolo = 2;
 	char* s="frames";

@@ -26,24 +26,14 @@ void draw_txtbox(int x, int y, int width,int height,char* c){
 		MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
 }
 
-
 /*
 
+void draw_new_tri(int x, int y, list l){
 
-void draw_split(int x, int y) {
-   MLV_draw_partial_image(IMG, SIZE_BLOCK*x, SIZE_BLOCK*y, 
-   	SIZE_BLOCK-4, SIZE_BLOCK-4, SIZE_BLOCK*x, SIZE_BLOCK*y);
 }
 
-
-void draw_split_board(int x, int y, int displayX, int displayY){
-	MLV_draw_partial_image(IMG,x*SIZE_BLOCK,y*SIZE_BLOCK,SIZE_BLOCK-4,
-		SIZE_BLOCK-4,displayX*SIZE_BLOCK,displayY*SIZE_BLOCK);
-}
+void add_constraint_points(int x, int y, list l){
 
 
-void erase_block(int x, int y) {
-   MLV_draw_filled_rectangle(SIZE_BLOCK*x, 
-   	SIZE_BLOCK*y, SIZE_BLOCK, SIZE_BLOCK, MLV_COLOR_BLACK);
 }
 */

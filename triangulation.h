@@ -1,8 +1,6 @@
 #ifndef FUNCTIONS
 #define FUNCTIONS
 
-/* TO DO */
-
 typedef struct point{
 	float coordX;
 	float coordY;
@@ -12,8 +10,15 @@ typedef struct triangle{
 	point x;
 	point y;
 	point z;
-	struct triangle* next;
 }triangle;
+
+
+typedef struct list{
+   triangle triLeft;
+   triangle triRight;
+   struct list *next;
+}list;
+
 
 
 triangle* createTriangle(float x1,float y1, float x2, float y2, float x3, float y3);
