@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
 	
 	printf("test list\n");
 	list* l = createList();
+	int test;
 	
 	
 	init_window();
@@ -23,19 +24,23 @@ int main(int argc, char *argv[]){
 	p1.coordX = 0.;
 	p1.coordY = 0.;
 	point p2 ;
-	p2.coordX = 512.0;
-	p2.coordY = 512.0;
+	p2.coordX = 511.0;
+	p2.coordY = 0.;
 	point p3;
-	p3.coordX = 512.0;
-	p3.coordY = 0.;
+	p3.coordX = 0.;
+	p3.coordY = 511.0;
 	point p4;
-	p4.coordX = 0.;
-	p4.coordY = 512.0;
+	p4.coordX = 511.0;
+	p4.coordY = 511.0;
 
-	triangle *triBase1 = createTriangle(p1,p3,p2); 
-	triangle *triBase2 = createTriangle(p1,p3,p4);
+	triangle *triBase1 = createTriangle(p1,p2,p3); 
+	triangle *triBase2 = createTriangle(p2,p3,p4);
 	printTriangle(triBase1);
 	printTriangle(triBase2);
+
+	test=addLeftTriangle(l, triBase1);
+	test=addLeftTriangle(l, triBase2);
+	printLst(l);
 
 	/*int yolo = 2;
 	char* s="frames";
@@ -115,21 +120,8 @@ void print_text_frames(int i, char* c){
 
 /*
 
-Fonction triangle avec coordonées parametre > PRINT. --> DONE;
 Fonction du bouton --> TODO;
 Fonction récuperer coordonnée cliquer et séparer en triangle --> TODO;
-
-
-	MLV_draw_text_box(30,,50,30,"Add Constraint Point",8,MLV_COLOR_BLUE,
-		MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-	MLV_draw_text_box(50,562,50,30,"Yolo",8,MLV_COLOR_BLUE,
-		MLV_COLOR_BLACK,MLV_COLOR_WHITE,MLV_TEXT_CENTER,MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
-	
-
-print point plein : (coordX, coordY, rayon, color);
-MLV_draw_filled_circle(50,50,3,MLV_COLOR_BLUE);
-
-
 
 */
 

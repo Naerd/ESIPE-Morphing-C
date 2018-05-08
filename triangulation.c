@@ -16,7 +16,6 @@ list* createList(){
 }
 
 int addLeftTriangle(list* lst, triangle* t){
-	
 	if(!lst->left){
 		lst->left = t;
 		return 0;
@@ -30,23 +29,19 @@ int addLeftTriangle(list* lst, triangle* t){
 		l->next = lst;
 		lst = l;
 		return 0;
-	}
-	
+	}	
 }
 
 int addRightTriangle(list* lst, triangle* t){
 	if(lst->left && !lst->right){
 		lst->right = t;
 		return 0;
-	
 	}
 	return -1;
-
 }
 
 
 triangle* createTriangle(point p1, point p2, point p3){
-
 	triangle *tri = (triangle*)malloc(sizeof(triangle));
 	tri->x=p1;
 	tri->y=p2;
@@ -83,14 +78,25 @@ void printTriangle(triangle *tri){
 	MLV_draw_line(tri->y.coordX,tri->y.coordY,tri->z.coordX,tri->z.coordY,colorTri);
 }
 
+/* for Test */ 
+void printLst(list* l){
+	if(l == NULL){
+		printf("NULL");
+	}
+	list* tmp = l;
+	while(tmp != NULL){
+		printf("p1(%.2f ; %.2f)\n",tmp->left->x.coordX, tmp->left->y.coordY);
+		tmp = tmp->next;
+	}
+}
 /*
 void add_constraint_points(int x, int y, list l){
 	point p;
 	p.coordX=x;
 	p.coordY=y;
-	list tmp = l;
-	while(isInside(tmp->triLeft,p)!=1){
-		tmp = tmp->next;
+	list lst = l;
+	while(isInside(lst->left,p)!=1){
+		lst = lst->next;
 	}
-	tmp->triLeft
+	lst->left
 }*/

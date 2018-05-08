@@ -28,5 +28,6 @@ float signe(point p1, point p2, point p3);
 int PointInTriangle (point p, point p1, point p2, point p3);
 int isInside(triangle* t,point p);
 void printTriangle(triangle *tri);
+void printLst(list* l); /* for test */
  
 #endif
