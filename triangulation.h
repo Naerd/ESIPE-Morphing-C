@@ -14,14 +14,16 @@ typedef struct triangle{
 
 
 typedef struct list{
-   triangle triLeft;
-   triangle triRight;
-   struct list *next;
+   triangle* left;
+   triangle* right;
+   struct list* next;
 }list;
 
 
-
-triangle* createTriangle(float x1,float y1, float x2, float y2, float x3, float y3);
+list* createList();
+int addLeftTriangle(list* lst,triangle* t);
+int addRightTriangle(list* lst, triangle* t);
+triangle* createTriangle(point p1, point p2, point p3);
 float signe(point p1, point p2, point p3);
 int PointInTriangle (point p, point p1, point p2, point p3);
 int isInside(triangle* t,point p);

@@ -13,9 +13,27 @@ void print_text_frames(int i, char* c); /* INTERFACE */
 
 int main(int argc, char *argv[]){
 
+	
+	printf("test list\n");
+	list* l = createList();
+	
+	
 	init_window();
-	triangle *triBase1 = createTriangle(0.,0.,512.0,0.,512.,512.); 
-	triangle *triBase2 = createTriangle(0.,0.,512.0,0.,0.,512.);
+	point p1;
+	p1.coordX = 0.;
+	p1.coordY = 0.;
+	point p2 ;
+	p2.coordX = 512.0;
+	p2.coordY = 512.0;
+	point p3;
+	p3.coordX = 512.0;
+	p3.coordY = 0.;
+	point p4;
+	p4.coordX = 0.;
+	p4.coordY = 512.0;
+
+	triangle *triBase1 = createTriangle(p1,p3,p2); 
+	triangle *triBase2 = createTriangle(p1,p3,p4);
 	printTriangle(triBase1);
 	printTriangle(triBase2);
 

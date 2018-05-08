@@ -4,23 +4,52 @@
 #include "interface.h"
 #include <MLV/MLV_all.h>
 
-triangle* createTriangle(float x1,float y1, float x2, float y2, float x3, float y3){
+
+list* createList(){
+
+	list* lst= malloc(sizeof(list*));
+	lst->left =NULL;
+	lst->right = NULL;
+	lst->next = NULL;
+	return lst;
+
+}
+
+int addLeftTriangle(list* lst, triangle* t){
+	
+	if(!lst->left){
+		lst->left = t;
+		return 0;
+	}
+	else{
+		if(!lst->right){
+			return -1;
+		}
+		list* l = createList();
+		l->left = t;
+		l->next = lst;
+		lst = l;
+		return 0;
+	}
+	
+}
+
+int addRightTriangle(list* lst, triangle* t){
+	if(lst->left && !lst->right){
+		lst->right = t;
+		return 0;
+	
+	}
+	return -1;
+
+}
+
+
+triangle* createTriangle(point p1, point p2, point p3){
 
 	triangle *tri = (triangle*)malloc(sizeof(triangle));
-	point p1;
-	point p2;
-	point p3;
-
-	p1.coordX=x1;
-	p1.coordY=y1;
 	tri->x=p1;
-
-	p2.coordX=x2;
-	p2.coordY=y2;
 	tri->y=p2;
-
-	p3.coordX=x3;
-	p3.coordY=y3;
 	tri->z=p3;
 
 	return tri;
