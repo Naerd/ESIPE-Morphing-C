@@ -46,17 +46,10 @@ int PointInTriangle (point p, point p1, point p2, point p3){
     return ((s1 == s2) && (s2 == s3));
 }
 int isInside(triangle* t,point p){
-    return PointInTriangle(p,t->x,t->y,t->z);
+	return PointInTriangle(p,t->x,t->y,t->z);
 }
 
-void printTriangle(triangle *tri){
-	MLV_draw_filled_circle(tri->x.coordX,tri->x.coordY,2,colorTri);
-	MLV_draw_filled_circle(tri->y.coordX,tri->y.coordY,2,colorTri);
-	MLV_draw_filled_circle(tri->z.coordX,tri->z.coordY,2,colorTri);
-	MLV_draw_line(tri->x.coordX,tri->x.coordY,tri->y.coordX,tri->y.coordY,colorTri);
-	MLV_draw_line(tri->x.coordX,tri->x.coordY,tri->z.coordX,tri->z.coordY,colorTri);
-	MLV_draw_line(tri->y.coordX,tri->y.coordY,tri->z.coordX,tri->z.coordY,colorTri);
-}
+
 
 
 void printLst(list* l){
@@ -66,14 +59,44 @@ void printLst(list* l){
 		tmp = tmp->next;
 	}
 }
-/*
-void add_constraint_points(int x, int y, list l){
+
+list* add_constraint_points(int x, int y, list* l){
+	
+
+
 	point p;
 	p.coordX=x;
 	p.coordY=y;
-	list lst = l;
-	while(isInside(lst->left,p)!=1){
+	list* lst = l;
+
+	if(isInside(lst->current,p)==1){
+		printf("du premier coup\n");
+		triangle *t1 = createTriangle(p,lst->current->x, lst->current->y);
+		triangle *t2 = createTriangle(p,lst->current->y, lst->current->z);;
+		triangle *t3 = createTriangle(p,lst->current->z, lst->current->x);;
+	
+		lst->current = t1;
+		l =  addTriangle(l,t2);
+		l = addTriangle(l,t3);
+		return l;
+	}
+	while(isInside(lst->next->current,p)!=1 && lst){
 		lst = lst->next;
 	}
-	lst->left
-}*/
+	if(isInside(lst->next->current,p)!=1)
+		printf("it work\n");
+	triangle* t = lst->next->current;
+	if(!lst->next->next)
+		lst->next =NULL;
+	else
+		lst->next = lst->next->next;
+
+	
+	triangle *t1 = createTriangle(p,t->x, t->y);
+	triangle *t2 = createTriangle(p,t->y, t->z);;
+	triangle *t3 = createTriangle(p,t->z, t->x);
+	l =  addTriangle(l,t1);
+	l =  addTriangle(l,t2);
+	l =  addTriangle(l,t3);
+	return l;
+}

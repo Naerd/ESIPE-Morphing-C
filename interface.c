@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <MLV/MLV_all.h>
-#include "triangulation.h"
-#include "interface.h"
 
+#include "interface.h"
+#include "triangulation.h"
 
 
 void init_window(){
@@ -26,14 +26,23 @@ void draw_txtbox(int x, int y, int width,int height,char* c){
 		MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
 }
 
-/*
 
-void draw_new_tri(int x, int y, list l){
 
+void printTriangle(triangle* tri){
+	MLV_draw_filled_circle(tri->x.coordX,tri->x.coordY,2,colorTri);
+	MLV_draw_filled_circle(tri->y.coordX,tri->y.coordY,2,colorTri);
+	MLV_draw_filled_circle(tri->z.coordX,tri->z.coordY,2,colorTri);
+	MLV_draw_line(tri->x.coordX,tri->x.coordY,tri->y.coordX,tri->y.coordY,colorTri);
+	MLV_draw_line(tri->x.coordX,tri->x.coordY,tri->z.coordX,tri->z.coordY,colorTri);
+	MLV_draw_line(tri->y.coordX,tri->y.coordY,tri->z.coordX,tri->z.coordY,colorTri);
 }
 
-void add_constraint_points(int x, int y, list l){
-
-
+void printList(list *l){
+	list* lst= l;
+	for(;lst;lst=lst->next){
+		printTriangle(lst->current);
+	}
+	MLV_actualise_window();
+	
 }
-*/
+

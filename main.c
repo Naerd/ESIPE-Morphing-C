@@ -34,16 +34,20 @@ int main(int argc, char *argv[]){
 
 	triangle *triBase1 = createTriangle(p1,p2,p3); 
 	triangle *triBase2 = createTriangle(p2,p3,p4);
-	printTriangle(triBase1);
+	/*printTriangle(triBase1);
 	printTriangle(triBase2);
-
-
+*/
 
 	l = addTriangle(l, triBase1);
 	l = addTriangle(l, triBase2);
-
+	
 
 	printLst(l);
+
+	l = add_constraint_points(26,80,l);
+	printList(l); /* graphic vesion*/
+	printLst(l); /* non graphic version*/
+	
 
 	/*int yolo = 2;
 	char* s="frames";

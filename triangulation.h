@@ -24,7 +24,8 @@ list* addTriangle(list* lst,triangle* t);
 
 triangle* createTriangle(point p1, point p2, point p3);
 int isInside(triangle* t,point p);
-void printTriangle(triangle *tri);
-void printLst(list* l); /* for test */
+
+void printLst(list* l); 
+list* add_constraint_points(int x, int y, list* l);
  
 #endif
