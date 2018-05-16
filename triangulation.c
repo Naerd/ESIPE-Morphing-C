@@ -5,39 +5,19 @@
 #include <MLV/MLV_all.h>
 
 
-list* createList(){
+list* createList(triangle* t){
 
 	list* lst= malloc(sizeof(list*));
-	lst->left =NULL;
-	lst->right = NULL;
+	lst->current = t;
 	lst->next = NULL;
 	return lst;
 
 }
 
-int addLeftTriangle(list* lst, triangle* t){
-	if(!lst->left){
-		lst->left = t;
-		return 0;
-	}
-	else{
-		if(!lst->right){
-			return -1;
-		}
-		list* l = createList();
-		l->left = t;
-		l->next = lst;
-		lst = l;
-		return 0;
-	}	
-}
-
-int addRightTriangle(list* lst, triangle* t){
-	if(lst->left && !lst->right){
-		lst->right = t;
-		return 0;
-	}
-	return -1;
+list* addTriangle(list* lst, triangle* t){
+	list* l = createList(t);
+	l->next = lst;
+	return l;	
 }
 
 
@@ -78,14 +58,11 @@ void printTriangle(triangle *tri){
 	MLV_draw_line(tri->y.coordX,tri->y.coordY,tri->z.coordX,tri->z.coordY,colorTri);
 }
 
-/* for Test */ 
+
 void printLst(list* l){
-	if(l == NULL){
-		printf("NULL");
-	}
 	list* tmp = l;
 	while(tmp != NULL){
-		printf("p1(%.2f ; %.2f)\n",tmp->left->x.coordX, tmp->left->y.coordY);
+		printf("p1(%.2f : %.2f) \n",tmp->current->x.coordX, tmp->current->x.coordY);
 		tmp = tmp->next;
 	}
 }

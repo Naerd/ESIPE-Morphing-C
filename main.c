@@ -14,20 +14,19 @@ void print_text_frames(int i, char* c); /* INTERFACE */
 int main(int argc, char *argv[]){
 
 	
-	printf("test list\n");
-	list* l = createList();
-	int test;
+
+	list* l = NULL;
 	
 	
 	init_window();
 	point p1;
-	p1.coordX = 0.;
-	p1.coordY = 0.;
+	p1.coordX = 0.0;
+	p1.coordY = 0.0;
 	point p2 ;
 	p2.coordX = 511.0;
-	p2.coordY = 0.;
+	p2.coordY = 0.0;
 	point p3;
-	p3.coordX = 0.;
+	p3.coordX = 0.0;
 	p3.coordY = 511.0;
 	point p4;
 	p4.coordX = 511.0;
@@ -38,8 +37,12 @@ int main(int argc, char *argv[]){
 	printTriangle(triBase1);
 	printTriangle(triBase2);
 
-	test=addLeftTriangle(l, triBase1);
-	test=addLeftTriangle(l, triBase2);
+
+
+	l = addTriangle(l, triBase1);
+	l = addTriangle(l, triBase2);
+
+
 	printLst(l);
 
 	/*int yolo = 2;
@@ -48,6 +51,7 @@ int main(int argc, char *argv[]){
 
 	MLV_actualise_window();
 	
+		
 
   	int x_clicked, y_clicked;
   	MLV_Event event;
