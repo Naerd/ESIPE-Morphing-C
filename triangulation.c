@@ -54,9 +54,14 @@ int isInside(triangle* t,point p){
 
 void printLst(list* l){
 	list* tmp = l;
+	int i = 0;
 	while(tmp != NULL){
-		printf("p1(%.2f : %.2f) \n",tmp->current->x.coordX, tmp->current->x.coordY);
+		printf("Tri n°%d : ",i);
+		printf("p1(%.2f : %.2f) | ",tmp->current->x.coordX, tmp->current->x.coordY);
+		printf("p2(%.2f : %.2f) | ",tmp->current->y.coordX, tmp->current->y.coordY);
+		printf("p3(%.2f : %.2f) \n",tmp->current->z.coordX, tmp->current->z.coordY);
 		tmp = tmp->next;
+		i++;
 	}
 }
 
@@ -76,7 +81,7 @@ list* add_constraint_points(int x, int y, list* l){
 		triangle *t3 = createTriangle(p,lst->current->z, lst->current->x);;
 	
 		lst->current = t1;
-		l =  addTriangle(l,t2);
+		l = addTriangle(l,t2);
 		l = addTriangle(l,t3);
 		return l;
 	}
@@ -84,7 +89,7 @@ list* add_constraint_points(int x, int y, list* l){
 		lst = lst->next;
 	}
 	if(isInside(lst->next->current,p)!=1)
-		printf("it work\n");
+		printf("it works\n");
 	triangle* t = lst->next->current;
 	if(!lst->next->next)
 		lst->next =NULL;

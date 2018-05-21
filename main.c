@@ -47,6 +47,10 @@ int main(int argc, char *argv[]){
 	l = add_constraint_points(26,80,l);
 	printList(l); /* graphic vesion*/
 	printLst(l); /* non graphic version*/
+  printf("lol\n");
+  l = add_constraint_points(298,362,l);
+  printList(l); /* graphic vesion*/
+  printLst(l); /* non graphic version*/
 	
 
 	/*int yolo = 2;
@@ -58,6 +62,12 @@ int main(int argc, char *argv[]){
 		
 
   	int x_clicked, y_clicked;
+    int x_clicked2, y_clicked2;
+
+    MLV_Event event2;
+    MLV_Button_state state2;
+    MLV_Mouse_button button2;
+
   	MLV_Event event;
   	MLV_Button_state state;
   	MLV_Mouse_button button;
@@ -73,11 +83,43 @@ int main(int argc, char *argv[]){
   			MLV_get_mouse_position(&x_clicked, &y_clicked);
   			/* Button Add */
   			if(x_clicked > 20 && x_clicked < 120 && y_clicked > 530 && y_clicked < 555){
-  				printf("ADD !\n");
+          printf("ADD !\n");
+          /*event2 = MLV_get_event(
+            NULL, NULL, NULL, NULL, NULL,
+            &x_clicked, &y_clicked, &button2, &state2);
+          int i = -1;
+  				while(event2 != MLV_MOUSE_BUTTON){
+            i++;
+            printf("while %d\n",i);
+            event2 = MLV_get_event(
+            NULL, NULL, NULL, NULL, NULL,
+            &x_clicked, &y_clicked, &button2, &state2);
+            if(event2 == MLV_MOUSE_BUTTON && button2 == MLV_BUTTON_LEFT && state2 == MLV_PRESSED){
+              MLV_get_mouse_position(&x_clicked2, &y_clicked2);
+            if(x_clicked2 > 0 && x_clicked2 < 512 && y_clicked2 > 0 && y_clicked2 < 512){
+              l = add_constraint_points(x_clicked2,y_clicked2,l);
+              printList(l);
+              printLst(l);
+              MLV_actualise_window();
+            }
+            }
+            }
+          if(event2 == MLV_MOUSE_BUTTON && button2 == MLV_BUTTON_LEFT && state2 == MLV_PRESSED){
+            MLV_get_mouse_position(&x_clicked2, &y_clicked2);
+            if(x_clicked2 > 0 && x_clicked2 < 512 && y_clicked2 > 0 && y_clicked2 < 512){
+              l = add_constraint_points(x_clicked2,y_clicked2,l);
+              printList(l);
+              printLst(l);
+              MLV_actualise_window();
+            }
+          }*/
   			}
   			/* Button Hide */ 
   			if(x_clicked > 140 && x_clicked < 240 && y_clicked > 530 && y_clicked < 555){
   				printf("HIDE !\n");
+          printList(l);
+          printLst(l);
+          MLV_actualise_window();
   			}
   			/* Button Start */
   			if(x_clicked > 260 && x_clicked < 360 && y_clicked > 530 && y_clicked < 555){
