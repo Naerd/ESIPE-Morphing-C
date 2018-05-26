@@ -65,13 +65,13 @@ void printLst(list* l){
 	}
 }
 
-list* add_constraint_points(int x, int y, list* l){
+
+
+list* add_constraint_points(point* p2, list* l){
 	
 
 
-	point p;
-	p.coordX=x;
-	p.coordY=y;
+	point p = *p2;
 	list* lst = l;
 
 	if(isInside(lst->current,p)==1){
@@ -105,3 +105,42 @@ list* add_constraint_points(int x, int y, list* l){
 	l =  addTriangle(l,t3);
 	return l;
 }
+
+point createPoint(float x, float y){
+
+	point p;
+	p.coordX = x;
+	p.coordY= y;
+	return p;
+}
+
+void init_Picture(list** l, list** l2){
+	point p1 = createPoint(0.0,0.0);
+	point p2 = createPoint(511.0,0.0);;
+	point p3= createPoint(0.0,511.0);;
+	point p4 = createPoint(511.0,511.0);;
+	
+
+	triangle *triBase1 = createTriangle(p1,p2,p3); 
+	triangle *triBase2 = createTriangle(p2,p3,p4);
+
+	*l = addTriangle(*l, triBase1);
+	*l = addTriangle(*l, triBase2);
+
+	point p5 = createPoint(512.0,0.0);
+	point p6 = createPoint(1023.0,0.0);;
+	point p7= createPoint(512.0,511.0);;
+	point p8 = createPoint(1023.0,511.0);;
+	
+
+	triangle *triBase3 = createTriangle(p5,p6,p7); 
+	triangle *triBase4 = createTriangle(p6,p7,p8);
+
+	*l2 = addTriangle(*l2, triBase3);
+	*l2 = addTriangle(*l2, triBase4);
+
+
+	
+
+
+} 
