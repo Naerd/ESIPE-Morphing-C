@@ -8,8 +8,7 @@
 
 void init_window(){
 	MLV_create_window("Morphing","Morphing",1024,575);
-	MLV_draw_image(IMG1,0,0);
-	MLV_draw_image(IMG2,512,0);
+	draw_image();
 	draw_txtbox(20, 530, 100, 25, "Add Points");
 	draw_txtbox(140, 530, 100, 25, "Hide Points");
 	draw_txtbox(260, 530, 100, 25, "Start");
@@ -17,6 +16,12 @@ void init_window(){
 	draw_txtbox(450, 530, 100, 25, "? Frames");
 	draw_txtbox(570, 530, 50, 25, ">>>");
 	draw_txtbox(640, 530, 100, 25, "Quit");
+	MLV_actualise_window();
+}
+
+void draw_image(){
+	MLV_draw_image(IMG1,0,0);
+	MLV_draw_image(IMG2,512,0);
 	MLV_actualise_window();
 }
 

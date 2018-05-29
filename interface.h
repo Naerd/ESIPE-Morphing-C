@@ -9,6 +9,7 @@
 
 
 void init_window();
+void draw_image();
 void draw_txtbox(int x, int y, int width,int height,char* c);
 void printTriangle(triangle *tri);
 void printList(list* l);
