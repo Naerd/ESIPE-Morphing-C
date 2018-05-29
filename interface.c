@@ -31,8 +31,6 @@ void draw_txtbox(int x, int y, int width,int height,char* c){
 		MLV_HORIZONTAL_CENTER,MLV_VERTICAL_CENTER);
 }
 
-
-
 void printTriangle(triangle* tri){
 	MLV_draw_filled_circle(tri->x.coordX,tri->x.coordY,2,colorTri);
 	MLV_draw_filled_circle(tri->y.coordX,tri->y.coordY,2,colorTri);
@@ -48,8 +46,4 @@ void printList(list *l){
 		printTriangle(lst->current);
 	}
 	MLV_actualise_window();
-	
 }
-
-
-

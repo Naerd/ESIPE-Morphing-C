@@ -5,17 +5,9 @@
 #include "interface.h"
 #include "triangulation.h"
 
-
-
-
-
 void print_text_frames(int i, char* c); /* INTERFACE */
 
-
-
 int main(int argc, char *argv[]){
-
-	
 
 	list* l = NULL;
 	list* l2 = NULL;
@@ -23,53 +15,41 @@ int main(int argc, char *argv[]){
 	init_window();
 	init_Picture(&l,&l2);
 
-
 	printList(l); /* graphic vesion*/
 	printList(l2);
-
-	MLV_actualise_window();
-	
-		
-
-  	int x_clicked, y_clicked;
-
-
   
-  	int win=-1;
+  printList(l);
+	MLV_actualise_window();
+  int x_clicked, y_clicked;
+  int win=-1;
 	int hide =-1;
-  	while(win != 1){
-		MLV_wait_mouse(&x_clicked, &y_clicked);
+  while(win != 1){
+	MLV_wait_mouse(&x_clicked, &y_clicked);
   		
 		/* Button Add */
-  		if(x_clicked > 20 && x_clicked < 120 && y_clicked > 530 && y_clicked < 555){
-			printf("ADD !\n");
-          		MLV_wait_mouse(&x_clicked, &y_clicked);
-			if(x_clicked < 511 && y_clicked < 511){
+  	if(x_clicked > 20 && x_clicked < 120 && y_clicked > 530 && y_clicked < 555){
+      printf("ADD !\n");
+      MLV_wait_mouse(&x_clicked, &y_clicked);
+      if(x_clicked < 511 && y_clicked < 511){
 				float x1 = x_clicked;
 				float y1 = y_clicked;
 				point p = createPoint(x1,y1);
 				l = add_constraint_points( &p ,l);
 				printList(l);
-
-
-
 				int ok = -1;
 				while(ok == -1){
-					MLV_wait_mouse(&x_clicked, &y_clicked);
-					if(x_clicked > 512 && y_clicked < 511){
+          MLV_wait_mouse(&x_clicked, &y_clicked);
+          if(x_clicked > 512 && y_clicked < 511){
 						float x2 = x_clicked;
 						float y2 = y_clicked;
 						point p2 = createPoint(x2,y2);
 						l2 = add_constraint_points( &p2 ,l2);
 						printList(l2);
 						ok = 1;
-					}
-
+          }
 				}
-
-			}
-			
-  		}
+      }
+  	}
   		
 		/* Button Hide */ 
   		else if(x_clicked > 140 && x_clicked < 240 && y_clicked > 530 && y_clicked < 555){
@@ -83,8 +63,6 @@ int main(int argc, char *argv[]){
 				printList(l2);
 				hide = -1;
 			}
-  			
-			
         	}  
  
   		/* Button Start */
@@ -110,15 +88,7 @@ int main(int argc, char *argv[]){
   		MLV_actualise_window();
   	}
   	return 0;
-
 }
-
-
-
-
-
-
-
 
 void print_text_frames(int i, char* c){
 	char s[100]="";
@@ -127,7 +97,3 @@ void print_text_frames(int i, char* c){
 	strcat(s, str);
 	strcat(s, c);
 }
-
-
-
-

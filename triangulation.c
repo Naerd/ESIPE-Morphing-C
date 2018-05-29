@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "triangulation.h"
 #include "interface.h"
 #include <MLV/MLV_all.h>
@@ -49,9 +50,6 @@ int isInside(triangle* t,point p){
 	return PointInTriangle(p,t->x,t->y,t->z);
 }
 
-
-
-
 void printLst(list* l){
 	list* tmp = l;
 	int i = 0;
@@ -65,11 +63,7 @@ void printLst(list* l){
 	}
 }
 
-
-
 list* add_constraint_points(point* p2, list* l){
-	
-
 
 	point p = *p2;
 	list* lst = l;
@@ -110,15 +104,15 @@ point createPoint(float x, float y){
 
 	point p;
 	p.coordX = x;
-	p.coordY= y;
+	p.coordY = y;
 	return p;
 }
 
 void init_Picture(list** l, list** l2){
 	point p1 = createPoint(0.0,0.0);
-	point p2 = createPoint(511.0,0.0);;
-	point p3= createPoint(0.0,511.0);;
-	point p4 = createPoint(511.0,511.0);;
+	point p2 = createPoint(511.0,0.0);
+	point p3 = createPoint(0.0,511.0);
+	point p4 = createPoint(511.0,511.0);
 	
 
 	triangle *triBase1 = createTriangle(p1,p2,p3); 
@@ -128,9 +122,9 @@ void init_Picture(list** l, list** l2){
 	*l = addTriangle(*l, triBase2);
 
 	point p5 = createPoint(512.0,0.0);
-	point p6 = createPoint(1023.0,0.0);;
-	point p7= createPoint(512.0,511.0);;
-	point p8 = createPoint(1023.0,511.0);;
+	point p6 = createPoint(1023.0,0.0);
+	point p7= createPoint(512.0,511.0);
+	point p8 = createPoint(1023.0,511.0);
 	
 
 	triangle *triBase3 = createTriangle(p5,p6,p7); 
@@ -138,9 +132,54 @@ void init_Picture(list** l, list** l2){
 
 	*l2 = addTriangle(*l2, triBase3);
 	*l2 = addTriangle(*l2, triBase4);
-
-
-	
-
-
 } 
+
+double distance(point *p1, point *p2){
+	return sqrt(pow((p2->coordX-p1->coordX),2.0)+pow((p2->coordY-p1->coordY),2.0));
+}
+
+
+/*
+
+triangle* neighbour(list* l, triangle *t, point *p){
+
+	point *p2, *p3;
+
+	if(t->x == p){
+		p2 = t->y;
+		p3 = t->z;
+	}
+	else if(t->y == p){
+		p2 = t->x;
+		p3 = t->z;
+	}
+	else{
+		p2 = t->x;
+		p3 = t->y;
+	}
+	while(lst->current->next != null){
+		if(lst->current != t){
+			if((lst->current->x == p2 && lst->current->y == p3) ||
+			(lst->current->x == p2 && lst->current->z == p3) ||
+			(lst->current->y == p2 && lst->current->z == p3)){
+				return lst->current;
+			}
+		}
+		lst->current = lst->current->next;
+	}
+	return null;
+}
+
+
+list* flip(list* l, point *p){
+	point p = *p2;
+	list* lst = l;
+
+
+
+	while(lst->current->next != null){
+
+	}
+
+	return l;
+}*/
