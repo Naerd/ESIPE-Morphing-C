@@ -82,8 +82,6 @@ list* add_constraint_points(point* p2, list* l){
 	while(isInside(lst->next->current,p)!=1 && lst){
 		lst = lst->next;
 	}
-	if(isInside(lst->next->current,p)!=1)
-		printf("it works\n");
 	triangle* t = lst->next->current;
 	if(!lst->next->next)
 		lst->next =NULL;
@@ -134,8 +132,8 @@ void init_Picture(list** l, list** l2){
 	*l2 = addTriangle(*l2, triBase4);
 } 
 
-double distance(point *p1, point *p2){
-	return sqrt(pow((p2->coordX-p1->coordX),2.0)+pow((p2->coordY-p1->coordY),2.0));
+double distance(point p1, point p2){
+	return sqrt(pow((p2.coordX-p1.coordX),2.0)+pow((p2.coordY-p1.coordY),2.0));
 }
 
 
@@ -197,16 +195,94 @@ triangle* neighbour(list* l, triangle *t, point p){
 	return NULL;
 }
 
-/*
-list* flip(list* l, point *p){
-	point p = *p2;
+
+list* flip(list* l, point p){
 	list* lst = l;
+	
 
 
-
-	while(lst->current->next != null){
-
+	while(lst->next != NULL){
+		if(isInside(lst->current,p)==1){
+			triangle* flop = neighbour(l,lst->current,p);
+			if(flop){
+				point oppos;
+				point partage1,partage2;
+	
+	
+				if(isPointEqual(lst->current->x , p)==1){
+					partage1 = lst->current->y;
+					partage2 = lst->current->z;
+				}else if(isPointEqual(lst->current->y , p)==1){
+					partage1 = lst->current->x;
+					partage2 = lst->current->z;
+				}else if(isPointEqual(lst->current->z , p)==1){
+					partage1 = lst->current->x;
+					partage2 = lst->current->y;
+				}else{
+					return NULL;
+				}
+	
+				if(isPointEqual(flop->x , partage1)!=1 && isPointEqual(flop->x , partage2)!=1){
+					oppos = flop->x;
+				}else if(isPointEqual(flop->y , partage1)!=1 && isPointEqual(flop->y , partage2)!=1){
+					oppos = flop->y;
+				}else if(isPointEqual(flop->z , partage1)!=1 && isPointEqual(flop->z , partage2)!=1){
+					oppos = flop->z;
+				}else{
+					return NULL;
+				}
+	
+	
+				float dist1 =distance(partage1, partage2);
+				float dist2 = distance(p,oppos);
+				if(dist1 > dist2){
+					triangle* t1 = createTriangle(p,oppos,partage1);
+					triangle* t2 = createTriangle(p,oppos,partage2);
+					
+					l= delTriangle(l, flop);
+					l= delTriangle(l, lst->current);
+					l= addTriangle(l, t1);
+					l= addTriangle(l, t2);
+					
+				}
+			}
+		}
+		lst = lst->next;
 	}
 
 	return l;
-}*/
+}
+
+int isTriangleEqual(triangle* t, triangle* t2){
+	if(isPointEqual(t->x,t2->x)==1 || isPointEqual(t->x,t2->y)==1 || isPointEqual(t->x,t2->z)==1){
+		if(isPointEqual(t->y,t2->x)==1 || isPointEqual(t->y,t2->y)==1 || isPointEqual(t->y,t2->z)==1){
+			if(isPointEqual(t->z,t2->x)==1 || isPointEqual(t->z,t2->y)==1 || isPointEqual(t->z,t2->z)==1){
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+list* delTriangle(list* lst, triangle* t){
+	list* l = lst;
+	if(isTriangleEqual(l->current,t)==1){
+		return l->next;
+	}
+	while(l->next){
+		if(isTriangleEqual(l->next->current,t)==1){
+			if(l->next->next){
+				list* l2= l->next->next;
+				l->next = l2;	
+			}
+			else{
+				l->next = NULL;
+			}
+			return lst; 
+		}
+		l = l->next;
+	}
+	return lst;
+
+}
+
+

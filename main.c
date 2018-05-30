@@ -43,7 +43,15 @@ int main(int argc, char *argv[]){
 				float y1 = y_clicked;
 				point p = createPoint(x1,y1);
 				l = add_constraint_points( &p ,l);
+				
+
+
+				l= flip(l, p);
+				
+
+				draw_image();
 				printList(l);
+				printList(l2);
 				int ok = -1;
 				while(ok == -1){
           MLV_wait_mouse(&x_clicked, &y_clicked);
@@ -52,6 +60,8 @@ int main(int argc, char *argv[]){
 						float y2 = y_clicked;
 						point p2 = createPoint(x2,y2);
 						l2 = add_constraint_points( &p2 ,l2);
+						draw_image();
+						printList(l);
 						printList(l2);
 						ok = 1;
           }

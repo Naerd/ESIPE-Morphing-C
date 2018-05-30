@@ -40,10 +40,13 @@ point createPoint(float x, float y);
 void init_Picture(list** l, list** l2);
 
 /* Calcule la distance entre 2 points */
-double distance(point *p1, point *p2);
+double distance(point p1, point p2);
 
 
 int isPointEqual(point p,point p2);
 triangle* neighbour(list* l, triangle *t, point p);
+list* flip(list* l, point p);
 
+int isTriangleEqual(triangle* t, triangle* t2);
+list* delTriangle(list* lst, triangle* t);
 #endif
