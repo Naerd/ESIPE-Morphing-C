@@ -42,6 +42,8 @@ void init_Picture(list** l, list** l2);
 /* Calcule la distance entre 2 points */
 double distance(point *p1, point *p2);
 
-triangle* neighbour(list* l, triangle *t, point *p);
+
+int isPointEqual(point p,point p2);
+triangle* neighbour(list* l, triangle *t, point p);
 
 #endif

@@ -14,7 +14,15 @@ int main(int argc, char *argv[]){
 	
 	init_window();
 	init_Picture(&l,&l2);
-
+	triangle* t = neighbour(l, l->current, l->current->z);
+	if(t!=NULL){
+		printf("It look like neighbour work\n"); 
+	}
+	else{
+		printf("shit\n");
+	}
+	
+	
 	printList(l); /* graphic vesion*/
 	printList(l2);
   

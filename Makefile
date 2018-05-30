@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -ansi
-LDFLAGS=-lMLV
+LDFLAGS=-lMLV -lm
 SRC=main.c interface.c triangulation.c
 OBJ=$(SRC:%.c=%.o)
 

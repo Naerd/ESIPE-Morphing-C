@@ -139,38 +139,65 @@ double distance(point *p1, point *p2){
 }
 
 
-/*
+int isPointEqual(point p,point p2){
+	if(p.coordX != p2.coordX)
+		return 0;
+	if(p.coordY != p2.coordY)
+		return 0;
+	return 1;
 
-triangle* neighbour(list* l, triangle *t, point *p){
-
-	point *p2, *p3;
-
-	if(t->x == p){
-		p2 = t->y;
-		p3 = t->z;
-	}
-	else if(t->y == p){
-		p2 = t->x;
-		p3 = t->z;
-	}
-	else{
-		p2 = t->x;
-		p3 = t->y;
-	}
-	while(lst->current->next != null){
-		if(lst->current != t){
-			if((lst->current->x == p2 && lst->current->y == p3) ||
-			(lst->current->x == p2 && lst->current->z == p3) ||
-			(lst->current->y == p2 && lst->current->z == p3)){
-				return lst->current;
-			}
-		}
-		lst->current = lst->current->next;
-	}
-	return null;
 }
 
 
+triangle* neighbour(list* l, triangle *t, point p){
+
+	point p2, p3;
+	list* lst = l;
+	if(isPointEqual(t->x, p) == 1){
+		p2 = t->y;
+		p3 = t->z;
+	}
+	else if(isPointEqual(t->y, p) == 1){
+		p2 = t->x;
+		p3 = t->z;
+	}
+	else if(isPointEqual(t->z, p) == 1){
+		p2 = t->x;
+		p3 = t->y;
+	}
+	else{
+		return NULL;
+	}
+	while(lst != NULL){
+		if(lst->current != t){
+			if(
+
+				(
+				isPointEqual(lst->current->x , p2)==1 ||
+				isPointEqual(lst->current->y , p2)==1 ||
+				isPointEqual(lst->current->z , p2)==1
+				)
+
+			){
+
+				if(	
+					(
+					isPointEqual(lst->current->x , p3)==1 ||
+					isPointEqual(lst->current->y , p3)==1 ||
+					isPointEqual(lst->current->z , p3)==1
+					) 
+
+				){
+					return lst->current;
+				}
+			}
+		}
+		lst = lst->next;
+	}
+	return NULL;
+}
+
+/*
 list* flip(list* l, point *p){
 	point p = *p2;
 	list* lst = l;
