@@ -45,6 +45,32 @@ triangle* createTriangle(point p1, point p2, point p3){
 	return tri;
 }
 
+listPoints* createListPoints(point p1, point p2){
+	listPoints* lp = (listPoints*)malloc(sizeof(listPoints));
+	lp->left = p1;
+	lp->right = p2;
+	lp->next = NULL;
+	return lp;
+}
+
+listPoints* addPoints(listPoints* lp, point p1, point p2){
+	listPoints* lptmp = createListPoints(p1, p2);
+	lptmp->next = lp;
+	return lptmp;
+}
+
+void printLp(listPoints* lp){
+	listPoints* tmp = lp;
+	int i = 0;
+	while(tmp != NULL){
+		printf("Pair nb %d :",i);
+		printf("pLeft(%.2f : %.2f) | ",tmp->left.coordX, tmp->left.coordY);
+		printf("pRight(%.2f : %.2f) \n",tmp->right.coordX, tmp->right.coordY);
+		tmp = tmp->next;
+		i++;
+	}
+}
+
 float signe(point p1, point p2, point p3){
     return (p1.coordX - p3.coordX) * (p2.coordY- p3.coordY) - (p2.coordX - p3.coordX) * (p1.coordY - p3.coordY);
 }

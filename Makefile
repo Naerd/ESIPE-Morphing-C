@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-Wall -ansi
 LDFLAGS=-lMLV -lm
-SRC=main.c interface.c triangulation.c
+SRC=main.c interface.c triangulation.c morphing.c
 OBJ=$(SRC:%.c=%.o)
 
 main: $(OBJ)

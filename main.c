@@ -4,6 +4,7 @@
 #include <MLV/MLV_all.h>
 #include "interface.h"
 #include "triangulation.h"
+#include "morphing.h"
 
 void print_text_frames(int i, char* c); /* INTERFACE */
 
@@ -11,6 +12,8 @@ int main(int argc, char *argv[]){
 
 	list* l = NULL;
 	list* l2 = NULL;
+	listPoints* lp = NULL;
+	listTransfo* lt = NULL;
 	
 	init_window();
 	init_Picture(&l,&l2);
@@ -48,6 +51,9 @@ int main(int argc, char *argv[]){
 						draw_image();
 						printList(l);
 						printList(l2);
+						lp = addPoints(lp,p,p2);
+						printLp(lp); /* Test pour liste paires de points */
+						printf("\n");
 						ok = 1;
           }
 				}
@@ -71,6 +77,9 @@ int main(int argc, char *argv[]){
   		/* Button Start */
   		else if(x_clicked > 260 && x_clicked < 360 && y_clicked > 530 && y_clicked < 555){
   			printf("START !\n");
+  			int t_frames = 10;
+  			lt = transformation(t_frames,lp);
+  			printLt(lt);
   		}
   		
 		/* Button <<< */
