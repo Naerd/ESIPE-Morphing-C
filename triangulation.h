@@ -18,6 +18,16 @@ typedef struct list{
    struct list* next;
 }list;
 
+typedef struct listPoints{
+	point left;
+	point right;
+	struct listPoints* next;
+}listPoints;
+
+listPoints* createListPoints(point p1, point p2);
+listPoints* addPoints(listPoints* lp, point p1, point p2);
+void printLp(listPoints* lp);
+
 
 /*Crée un triangle*/
 triangle* createTriangle(point p1, point p2, point p3);
