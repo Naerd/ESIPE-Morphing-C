@@ -18,9 +18,23 @@ list* createList(triangle* t){
 list* addTriangle(list* lst, triangle* t){
 	list* l = createList(t);
 	l->next = lst;
+	
+ 	if(neighbour(l,t,t->x)){
+		l = flip(l,t,neighbour(l,t,t->x),t->x);	
+	}
+	else if(neighbour(l,t,t->y)){
+		l = flip(l,t,neighbour(l,t,t->y),t->y);
+	}
+	else if(neighbour(l,t,t->z)){
+		l = flip(l,t,neighbour(l,t,t->z),t->z);
+	}
 	return l;	
 }
-
+list* addTriangle2(list* lst, triangle* t){
+	list* l = createList(t);
+	l->next = lst;
+	return l;	
+}
 
 triangle* createTriangle(point p1, point p2, point p3){
 	triangle *tri = (triangle*)malloc(sizeof(triangle));
@@ -50,20 +64,8 @@ int isInside(triangle* t,point p){
 	return PointInTriangle(p,t->x,t->y,t->z);
 }
 
-void printLst(list* l){
-	list* tmp = l;
-	int i = 0;
-	while(tmp != NULL){
-		printf("Tri n°%d : ",i);
-		printf("p1(%.2f : %.2f) | ",tmp->current->x.coordX, tmp->current->x.coordY);
-		printf("p2(%.2f : %.2f) | ",tmp->current->y.coordX, tmp->current->y.coordY);
-		printf("p3(%.2f : %.2f) \n",tmp->current->z.coordX, tmp->current->z.coordY);
-		tmp = tmp->next;
-		i++;
-	}
-}
 
-list* add_constraint_points(point* p2, list* l){
+list* add_constraint_points(point* p2, list* l, int delawney){
 
 	point p = *p2;
 	list* lst = l;
@@ -92,9 +94,16 @@ list* add_constraint_points(point* p2, list* l){
 	triangle *t1 = createTriangle(p,t->x, t->y);
 	triangle *t2 = createTriangle(p,t->y, t->z);;
 	triangle *t3 = createTriangle(p,t->z, t->x);
-	l =  addTriangle(l,t1);
-	l =  addTriangle(l,t2);
-	l =  addTriangle(l,t3);
+	if( delawney == 1){
+		l =  addTriangle(l,t1);
+		l =  addTriangle(l,t2);
+		l =  addTriangle(l,t3);
+	}
+	else{
+		l =  addTriangle2(l,t1);
+		l =  addTriangle2(l,t2);
+		l =  addTriangle2(l,t3);
+	}
 	return l;
 }
 
@@ -196,59 +205,53 @@ triangle* neighbour(list* l, triangle *t, point p){
 }
 
 
-list* flip(list* l, point p){
-	list* lst = l;
-	
-
-
-	while(lst->next != NULL){
-		if(isInside(lst->current,p)==1){
-			triangle* flop = neighbour(l,lst->current,p);
-			if(flop){
-				point oppos;
-				point partage1,partage2;
-	
-	
-				if(isPointEqual(lst->current->x , p)==1){
-					partage1 = lst->current->y;
-					partage2 = lst->current->z;
-				}else if(isPointEqual(lst->current->y , p)==1){
-					partage1 = lst->current->x;
-					partage2 = lst->current->z;
-				}else if(isPointEqual(lst->current->z , p)==1){
-					partage1 = lst->current->x;
-					partage2 = lst->current->y;
-				}else{
-					return NULL;
-				}
-	
-				if(isPointEqual(flop->x , partage1)!=1 && isPointEqual(flop->x , partage2)!=1){
-					oppos = flop->x;
-				}else if(isPointEqual(flop->y , partage1)!=1 && isPointEqual(flop->y , partage2)!=1){
-					oppos = flop->y;
-				}else if(isPointEqual(flop->z , partage1)!=1 && isPointEqual(flop->z , partage2)!=1){
-					oppos = flop->z;
-				}else{
-					return NULL;
-				}
-	
-	
-				float dist1 =distance(partage1, partage2);
-				float dist2 = distance(p,oppos);
-				if(dist1 > dist2){
-					triangle* t1 = createTriangle(p,oppos,partage1);
-					triangle* t2 = createTriangle(p,oppos,partage2);
-					
-					l= delTriangle(l, flop);
-					l= delTriangle(l, lst->current);
-					l= addTriangle(l, t1);
-					l= addTriangle(l, t2);
-					
-				}
-			}
+list* flip(list* l, triangle* t, triangle* flop, point p){
+		if(!l){
+			printf("Skyfall \n");
+			return NULL;
 		}
-		lst = lst->next;
-	}
+		point oppos;
+		point partage1,partage2;
+	
+		if(isPointEqual(t->x , p)==1){
+			partage1 = t->y;
+			partage2 = t->z;
+		}else if(isPointEqual(t->y , p)==1){
+			partage1 = t->x;
+			partage2 = t->z;
+		}else if(isPointEqual(t->z , p)==1){
+			partage1 = t->x;
+			partage2 = t->y;
+		}else{
+			printf("sa fait un flop\n");
+			return NULL;
+		}
+	
+		if(isPointEqual(flop->x , partage1)!=1 && isPointEqual(flop->x , partage2)!=1){
+			oppos = flop->x;
+		}else if(isPointEqual(flop->y , partage1)!=1 && isPointEqual(flop->y , partage2)!=1){
+			oppos = flop->y;
+		}else if(isPointEqual(flop->z , partage1)!=1 && isPointEqual(flop->z , partage2)!=1){
+			oppos = flop->z;
+		}else{
+			printf("sa fait un flop\n");
+			return NULL;
+		}
+	
+	
+		float dist1 =distance(partage1, partage2);
+		float dist2 = distance(p,oppos);
+		if(dist1 > dist2){
+			triangle* t1 = createTriangle(p,oppos,partage1);
+			triangle* t2 = createTriangle(p,oppos,partage2);
+			
+			l= delTriangle(l, flop);
+			l= delTriangle(l, t);
+			l= addTriangle(l, t1);
+			l= addTriangle(l, t2);
+			
+		}
+	
 
 	return l;
 }

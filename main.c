@@ -14,14 +14,6 @@ int main(int argc, char *argv[]){
 	
 	init_window();
 	init_Picture(&l,&l2);
-	triangle* t = neighbour(l, l->current, l->current->z);
-	if(t!=NULL){
-		printf("It look like neighbour work\n"); 
-	}
-	else{
-		printf("shit\n");
-	}
-	
 	
 	printList(l); /* graphic vesion*/
 	printList(l2);
@@ -36,19 +28,12 @@ int main(int argc, char *argv[]){
   		
 		/* Button Add */
   	if(x_clicked > 20 && x_clicked < 120 && y_clicked > 530 && y_clicked < 555){
-      printf("ADD !\n");
       MLV_wait_mouse(&x_clicked, &y_clicked);
       if(x_clicked < 511 && y_clicked < 511){
 				float x1 = x_clicked;
 				float y1 = y_clicked;
 				point p = createPoint(x1,y1);
-				l = add_constraint_points( &p ,l);
-				
-
-
-				l= flip(l, p);
-				
-
+				l = add_constraint_points( &p ,l,1);
 				draw_image();
 				printList(l);
 				printList(l2);
@@ -59,7 +44,7 @@ int main(int argc, char *argv[]){
 						float x2 = x_clicked;
 						float y2 = y_clicked;
 						point p2 = createPoint(x2,y2);
-						l2 = add_constraint_points( &p2 ,l2);
+						l2 = add_constraint_points( &p2 ,l2,0);
 						draw_image();
 						printList(l);
 						printList(l2);
@@ -71,7 +56,7 @@ int main(int argc, char *argv[]){
   		
 		/* Button Hide */ 
   		else if(x_clicked > 140 && x_clicked < 240 && y_clicked > 530 && y_clicked < 555){
-			printf("HIDE !\n");
+
 			if(hide == -1){
 				draw_image();
 				hide = 1;
