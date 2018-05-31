@@ -14,6 +14,18 @@ list* createList(triangle* t){
 	return lst;
 
 }
+void freeNoeud(list* l){
+	free(l->current);
+	free(l);
+}
+void freeList(list* l){
+	if(l && l->next){
+		freeList(l->next);
+	}
+	if(l){
+		freeNoeud(l);
+	}
+}
 
 list* addTriangle(list* lst, triangle* t){
 	list* l = createList(t);
@@ -101,25 +113,39 @@ list* add_constraint_points(point* p2, list* l, int delawney){
 		triangle *t1 = createTriangle(p,lst->current->x, lst->current->y);
 		triangle *t2 = createTriangle(p,lst->current->y, lst->current->z);;
 		triangle *t3 = createTriangle(p,lst->current->z, lst->current->x);;
-	
-		lst->current = t1;
-		l = addTriangle(l,t2);
-		l = addTriangle(l,t3);
+		l = l->next;
+		freeNoeud(lst);
+		
+		if(delawney == 1){	
+			l = addTriangle(l,t1);
+			l = addTriangle(l,t2);
+			l = addTriangle(l,t3);
+		}
+		else{
+			l =  addTriangle2(l,t1);
+			l =  addTriangle2(l,t2);
+			l =  addTriangle2(l,t3);
+		}
 		return l;
 	}
 	while(isInside(lst->next->current,p)!=1 && lst){
 		lst = lst->next;
 	}
 	triangle* t = lst->next->current;
-	if(!lst->next->next)
-		lst->next =NULL;
-	else
-		lst->next = lst->next->next;
 
 	
 	triangle *t1 = createTriangle(p,t->x, t->y);
 	triangle *t2 = createTriangle(p,t->y, t->z);;
 	triangle *t3 = createTriangle(p,t->z, t->x);
+	if(!lst->next->next){
+		freeNoeud(lst->next);
+		lst->next = NULL;
+	}
+	else{
+		list* l2 = lst->next;
+		lst->next = lst->next->next;
+		freeNoeud(l2);
+	}
 	if( delawney == 1){
 		l =  addTriangle(l,t1);
 		l =  addTriangle(l,t2);

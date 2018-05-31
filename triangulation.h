@@ -48,4 +48,10 @@ list* flip(list* l, triangle* t, triangle* flop, point p);
 
 int isTriangleEqual(triangle* t, triangle* t2);
 list* delTriangle(list* lst, triangle* t);
+
+
+
+void freeList(list* l);
+
+
 #endif

@@ -94,6 +94,8 @@ int main(int argc, char *argv[]){
   
 		/* Button Quit */
   		else if(x_clicked > 640 && x_clicked < 740 && y_clicked > 530 && y_clicked < 555){
+			freeList(l);
+			freeList(l2);
   			return 0;
   		}
   		
