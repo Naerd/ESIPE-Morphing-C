@@ -6,8 +6,6 @@
 #include "triangulation.h"
 #include "morphing.h"
 
-void print_text_frames(int i, char* c); /* INTERFACE */
-
 int main(int argc, char *argv[]){
 
 	list* l = NULL;
@@ -25,7 +23,7 @@ int main(int argc, char *argv[]){
 	MLV_actualise_window();
   int x_clicked, y_clicked;
   int win=-1;
-	int hide =-1;
+  int hide =-1;
   while(win != 1){
 	MLV_wait_mouse(&x_clicked, &y_clicked);
   		
@@ -60,7 +58,9 @@ int main(int argc, char *argv[]){
       }
   	}
   		
-		/* Button Hide */ 
+		/**
+		 * Button Hide
+		 */ 
   		else if(x_clicked > 140 && x_clicked < 240 && y_clicked > 530 && y_clicked < 555){
 
 			if(hide == -1){
@@ -74,7 +74,9 @@ int main(int argc, char *argv[]){
 			}
         	}  
  
-  		/* Button Start */
+  		/**
+		 * Button Start
+		 */
   		else if(x_clicked > 260 && x_clicked < 360 && y_clicked > 530 && y_clicked < 555){
   			printf("START !\n");
   			int t_frames = 10;
@@ -92,7 +94,9 @@ int main(int argc, char *argv[]){
   			printf(">>> RIGHT !\n");
   		}
   
-		/* Button Quit */
+		/**
+		 * Button quit
+		 */
   		else if(x_clicked > 640 && x_clicked < 740 && y_clicked > 530 && y_clicked < 555){
 			freeList(l);
 			freeList(l2);
@@ -104,10 +108,3 @@ int main(int argc, char *argv[]){
   	return 0;
 }
 
-void print_text_frames(int i, char* c){
-	char s[100]="";
-	char str[10];
-	sprintf(str, " %d", i);
-	strcat(s, str);
-	strcat(s, c);
-}

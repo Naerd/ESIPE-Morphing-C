@@ -14,6 +14,7 @@ list* createList(triangle* t){
 	return lst;
 
 }
+
 void freeNoeud(list* l){
 	free(l->current);
 	free(l);
